@@ -9,4 +9,4 @@ class MyAudioProcessor extends AudioWorkletProcessor {
   }
 };
 
-registerProcessor("my-audio-processor", MyAudioProcessor);
+registerProcessor("inaudible-processor", MyAudioProcessor);
