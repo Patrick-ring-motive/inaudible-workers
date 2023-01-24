@@ -17,6 +17,7 @@ window.InaudibleWorker = class InaudibleWorker {
           try {
            document.currentScript.click();
             document.head.click();
+            document.currentScript.dispatchEvent(new Event('mousedown'));
             await sleep(50);
             this.audioContext = new InaudibleContext();
             await this.audioContext.resume();
