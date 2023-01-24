@@ -1,4 +1,4 @@
-window.InaudibleContext = window.OfflineAudioContext||window.AudioContext||window.webkitAudioContext||window.BaseAudioContext;
+window.InaudibleContext = window.AudioContext||window.webkitAudioContext||window.BaseAudioContext||window.OfflineAudioContext;
 
 window.InaudibleWorker = class InaudibleWorker {
  constructor(workerURL) {
