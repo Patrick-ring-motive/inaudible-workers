@@ -11,6 +11,7 @@ window.InaudibleWorker = class InaudibleWorker {
    async buildWorker(workerURL){
        
           try {
+           document.currentScript.click();
             this.audioContext = new InaudibleContext();
             await audioContext.resume();
             await audioContext.audioWorklet.addModule("inaudible-processor.js");
