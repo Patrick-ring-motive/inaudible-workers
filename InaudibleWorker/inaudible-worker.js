@@ -1,17 +1,26 @@
 window.InaudibleContext = window.OfflineAudioContext||window.AudioContext||window.webkitAudioContext||window.BaseAudioContext;
 
-var audioContext = null;
+window.InaudibleWorker = class WindowWorker {
+ constructor(workerURL) {
 
-async function createMyAudioProcessor() {
-  if (!audioContext) {
-    try {
-      audioContext = new AudioContext();
-      await audioContext.resume();
-      await audioContext.audioWorklet.addModule("inaudible-processor.js");
-    } catch (e) {
-      return null;
-    }
+
+  return this.buildWorker(workerURL)
+}
+  
+  
+    buildWorker(workerURL){
+        if (!audioContext) {
+          try {
+            audioContext = new AudioContext();
+            await audioContext.resume();
+            await audioContext.audioWorklet.addModule("inaudible-processor.js");
+          } catch (e) {
+            return null;
+          }
+        }
+        return new AudioWorkletNode(audioContext, "my-audio-processor");
+    
   }
-
-  return new AudioWorkletNode(audioContext, "my-audio-processor");
+  
+  
 }
