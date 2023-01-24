@@ -1,5 +1,9 @@
 window.InaudibleContext = window.AudioContext||window.webkitAudioContext||window.BaseAudioContext||window.OfflineAudioContext;
-
+window.sleep = function(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
 window.InaudibleWorker = class InaudibleWorker {
  constructor(workerURL) {
 
@@ -12,6 +16,7 @@ window.InaudibleWorker = class InaudibleWorker {
        
           try {
            document.currentScript.click();
+            await sleep(50);
             this.audioContext = new InaudibleContext();
             await this.audioContext.resume();
             await this.audioContext.audioWorklet.addModule("inaudible-processor.js");
