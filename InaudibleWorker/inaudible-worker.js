@@ -5,11 +5,11 @@ async function createMyAudioProcessor() {
     try {
       audioContext = new AudioContext();
       await audioContext.resume();
-      await audioContext.audioWorklet.addModule("module-url/module.js");
+      await audioContext.audioWorklet.addModule("inaudible-processor.js");
     } catch (e) {
       return null;
     }
   }
 
-  return new AudioWorkletNode(audioContext, "processor-name");
+  return new AudioWorkletNode(audioContext, "my-audio-processor");
 }
