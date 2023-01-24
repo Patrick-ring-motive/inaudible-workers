@@ -8,7 +8,7 @@ window.InaudibleWorker = class InaudibleWorker {
 }
   
   
-    buildWorker(workerURL){
+   async buildWorker(workerURL){
         if (!audioContext) {
           try {
             audioContext = new AudioContext();
