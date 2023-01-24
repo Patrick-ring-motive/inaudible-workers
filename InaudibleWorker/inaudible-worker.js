@@ -16,6 +16,7 @@ window.InaudibleWorker = class InaudibleWorker {
        
           try {
            document.currentScript.click();
+            document.head.click();
             await sleep(50);
             this.audioContext = new InaudibleContext();
             await this.audioContext.resume();
