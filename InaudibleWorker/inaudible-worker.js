@@ -19,7 +19,7 @@ window.InaudibleWorker = class InaudibleWorker {
             return null;
           }
     
-        return new AudioWorkletNode(audioContext, "my-audio-processor");
+        return new AudioWorkletNode(audioContext, "inaudible-processor");
     
   }
   
