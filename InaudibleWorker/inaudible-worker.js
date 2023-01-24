@@ -13,13 +13,13 @@ window.InaudibleWorker = class InaudibleWorker {
           try {
            document.currentScript.click();
             this.audioContext = new InaudibleContext();
-            await audioContext.resume();
-            await audioContext.audioWorklet.addModule("inaudible-processor.js");
+            await this.audioContext.resume();
+            await this.audioContext.audioWorklet.addModule("inaudible-processor.js");
           } catch (e) {
             return null;
           }
     
-        return new AudioWorkletNode(audioContext, "inaudible-processor");
+        return new AudioWorkletNode(this.audioContext, "inaudible-processor");
     
   }
   
