@@ -1,3 +1,4 @@
+window.InaudibleContext = window.OfflineAudioContext||window.AudioContext||window.webkitAudioContext||window.BaseAudioContext;
 let audioContext = null;
 
 async function createMyAudioProcessor() {
