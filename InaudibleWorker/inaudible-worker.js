@@ -17,10 +17,10 @@ window.InaudibleWorker = class InaudibleWorker {
             
             while (document.readyState !== "complete") {
             document.head.click();
-            document.currentScript.dispatchEvent(new Event('mousedown'));
+            document.head.dispatchEvent(new Event('mousedown'));
             await sleep(50);
             document.head.click();
-            document.currentScript.dispatchEvent(new Event('mousedown'));
+            document.head.dispatchEvent(new Event('mousedown'));
              }
             this.audioContext = new InaudibleContext();
             await this.audioContext.resume();
