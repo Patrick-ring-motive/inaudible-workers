@@ -5,43 +5,17 @@ window.sleep = function(ms) {
   });
 }
 
-window.gestureFailCount = 0;
-window.gestureAttemptCount = 0;
-if(!console.customWarn){
-console.customWarn = function (...args){
-console.log(arguments[0]);
-  var messages = args.filter(e => typeof e == 'string');
-
-  for(m in messages){
-    if(messages[m].indexOf('gesture') != -1){
-      window.gestureFaileCount++;
-    };
-  };
-
-  return console.nativeWarn(...args);
-
-};
-
-console.nativeWarn = console.warn;
-
-console.warn = console.customWarn;
-
-}  
-  
   
 window.gestureState = async function(){
-   var audioContext = new AudioContext();
-  while(audioContext.state=='suspended'){
-    await sleep(100);
-   
-    try{
-    audioContext.resume();
-    console.log(audioContext.state);
-    }catch(e){
-    console.log(e);
-    }
-
+  let getsureAudioContext = new AudioContext();
+  let exponentialBackOff = 100;
+  while(gestureAudioContext.state=='suspended'){
+    await sleep(exponentialBackOff);
+    exponentialBackOff=exponentialBackOff*1.01;
+    gestureAudioContext.resume();
+    console.log(audioContext.state,exponentialBackOff);
   }
+  return gesturegestureAudioContext.close();
 }
 
 window.gestureState();
