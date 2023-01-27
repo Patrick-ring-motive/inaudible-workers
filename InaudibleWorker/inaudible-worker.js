@@ -6,11 +6,13 @@ window.sleep = function(ms) {
 }
 
   
-window.gestureState = async function(){
+window.gestureReady = async function(){
   let gestureAudioContext = new AudioContext();
   let exponentialBackOff = 100;
   while(gestureAudioContext.state=='suspended'){
     await sleep(exponentialBackOff);
+    document.head.click();
+    document.head.dispatchEvent(new Event('mousedown'));
     exponentialBackOff=exponentialBackOff*1.01;
     gestureAudioContext.resume();
     console.log(gestureAudioContext.state,exponentialBackOff);
