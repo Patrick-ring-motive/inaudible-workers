@@ -1,4 +1,4 @@
-window.InaudibleContext = window.AudioContext||window.webkitAudioContext||window.BaseAudioContext||window.OfflineAudioContext;
+window.InaudibleContext = window.OfflineAudioContext||window.AudioContext||window.webkitAudioContext||window.BaseAudioContext;
 window.sleep = function(ms) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
@@ -13,7 +13,7 @@ window.gestureReady = async function(){
     await sleep(exponentialBackOff);
     document.body.click();
     document.body.dispatchEvent(new Event('mousedown'));
-    navigator.clipboard.write(navigator.clipboard.read());
+   // navigator.clipboard.write(navigator.clipboard.read());
     exponentialBackOff=exponentialBackOff*1.01;
     gestureAudioContext.resume();
     console.log(gestureAudioContext.state,exponentialBackOff);
