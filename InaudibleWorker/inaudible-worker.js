@@ -30,18 +30,17 @@ console.warn = console.customWarn;
   
   
 window.gestureState = async function(){
-  while(window.gestureAttemptCount<=window.gestureFailCount){
+   var audioContext = new AudioContext();
+  while(audioContext.state=='suspended'){
     await sleep(100);
-    window.gestureAttemptCount++;
-    var audioContext = new AudioContext();
+   
     try{
     audioContext.resume();
-      console.log(audioContext.state);
+    console.log(audioContext.state);
     }catch(e){
     console.log(e);
     }
-    console.log('ga',window.gestureAttemptCount);
-    console.log('ga',window.gestureFailCount);
+
   }
 }
 
