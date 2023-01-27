@@ -22,7 +22,11 @@ window.InaudibleWorker = class InaudibleWorker {
             document.head.click();
             document.head.dispatchEvent(new Event('mousedown'));
              }
+            try{
             this.audioContext = new InaudibleContext();
+            }catch(e){
+            console.log(e.message);
+            }
             await this.audioContext.resume();
             await this.audioContext.audioWorklet.addModule("inaudible-processor.js");
   
