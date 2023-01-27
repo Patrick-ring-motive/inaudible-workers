@@ -20,7 +20,7 @@ window.gestureReady = async function(){
   return gestureAudioContext.close();
 }
 
-window.gestureState();
+window.gestureReady();
 
 window.InaudibleWorker = class InaudibleWorker {
  constructor(workerURL) {
