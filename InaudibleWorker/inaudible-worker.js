@@ -33,6 +33,7 @@ window.gestureState = async function(){
   while(window.gestureAttemptCount<=window.gestureFailCount){
     await sleep(100);
     var audioContext = new InaudibleContext();
+    await audioContext.resume();
     console.log('ga',window.gestureAttemptCount);
     console.log('ga',window.gestureFailCount);
   }
