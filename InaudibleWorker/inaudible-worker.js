@@ -7,7 +7,7 @@ window.sleep = function(ms) {
 
   
 window.gestureReady = async function(){
-  let gestureAudioContext = new InaudibleContext(0,0,44100);
+  let gestureAudioContext = new InaudibleContext(0,1,44100);
   let exponentialBackOff = 100;
   while(gestureAudioContext.state=='suspended'){
     await sleep(exponentialBackOff);
@@ -34,7 +34,7 @@ window.InaudibleWorker = class InaudibleWorker {
 
             await window.gestureReady();
 
-            this.audioContext = new InaudibleContext(0,0,44100);
+            this.audioContext = new InaudibleContext(0,1,44100);
             await this.audioContext.resume();
             await this.audioContext.audioWorklet.addModule("inaudible-processor.js");
   
