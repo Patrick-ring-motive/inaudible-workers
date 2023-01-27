@@ -13,7 +13,7 @@ window.gestureState = async function(){
     await sleep(exponentialBackOff);
     exponentialBackOff=exponentialBackOff*1.01;
     gestureAudioContext.resume();
-    console.log(audioContext.state,exponentialBackOff);
+    console.log(gestureAudioContext.state,exponentialBackOff);
   }
   return gesturegestureAudioContext.close();
 }
