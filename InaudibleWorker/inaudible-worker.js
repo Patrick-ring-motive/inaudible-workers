@@ -15,7 +15,7 @@ window.gestureState = async function(){
     gestureAudioContext.resume();
     console.log(gestureAudioContext.state,exponentialBackOff);
   }
-  return gesturegestureAudioContext.close();
+  return gestureAudioContext.close();
 }
 
 window.gestureState();
