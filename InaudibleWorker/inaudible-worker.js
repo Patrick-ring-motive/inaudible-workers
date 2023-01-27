@@ -35,7 +35,7 @@ window.gestureState = async function(){
     window.gestureAttemptCount++;
     var audioContext = new AudioContext();
     try{
-    await audioContext.resume();
+    audioContext.resume();
       console.log(audioContext.getOutputTimestamp());
     }catch(e){
     console.log(e);
