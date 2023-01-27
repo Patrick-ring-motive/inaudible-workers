@@ -33,7 +33,11 @@ window.gestureState = async function(){
   while(window.gestureAttemptCount<=window.gestureFailCount){
     await sleep(100);
     var audioContext = new AudioContext();
+    try{
     await audioContext.resume();
+    }catch(e){
+    console.log(e);
+    }
     console.log('ga',window.gestureAttemptCount);
     console.log('ga',window.gestureFailCount);
   }
