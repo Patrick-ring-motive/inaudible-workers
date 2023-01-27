@@ -7,8 +7,8 @@ window.sleep = function(ms) {
 
 window.gestureFailCount = 0;
 window.gestureAttemptCount = 0;
-if(!window.customWarn){
-window.customWarn = function (...args){
+if(!console.customWarn){
+console.customWarn = function (...args){
 console.log(arguments[0]);
   var messages = args.filter(e => typeof e == 'string');
 
@@ -24,7 +24,7 @@ console.log(arguments[0]);
 
 console.nativeWarn = console.warn;
 
-console.warn = window.customWarn;
+console.warn = console.customWarn;
 
 }  
   
@@ -32,6 +32,7 @@ console.warn = window.customWarn;
 window.gestureState = async function(){
   while(window.gestureAttemptCount<=window.gestureFailCount){
     await sleep(100);
+    window.gestureAttemptCount++;
     var audioContext = new AudioContext();
     try{
     await audioContext.resume();
