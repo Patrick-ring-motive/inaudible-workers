@@ -13,7 +13,6 @@ window.gestureReady = async function(){
     await sleep(exponentialBackOff);
     document.body.click();
     document.body.dispatchEvent(new Event('mousedown'));
-   // navigator.clipboard.write(navigator.clipboard.read());
     exponentialBackOff=exponentialBackOff*1.01;
     gestureAudioContext.resume();
     console.log(gestureAudioContext.state,exponentialBackOff);
@@ -21,7 +20,7 @@ window.gestureReady = async function(){
   return gestureAudioContext.close();
 }
 
-window.gestureReady();
+
 
 window.InaudibleWorker = class InaudibleWorker {
  constructor(workerURL) {
@@ -33,24 +32,14 @@ window.InaudibleWorker = class InaudibleWorker {
   
    async buildWorker(workerURL){
 
-            
-            while (document.readyState !== "complete") {
-            document.head.click();
-            document.head.dispatchEvent(new Event('mousedown'));
-            await sleep(50);
-            document.head.click();
-            document.head.dispatchEvent(new Event('mousedown'));
-             }
-            try{
-           // this.audioContext = new InaudibleContext();
-            }catch(e){
-            console.log(e.message);
-            }
-          //  await this.audioContext.resume();
-         //   await this.audioContext.audioWorklet.addModule("inaudible-processor.js");
+            await window.gestureReady();
+
+            this.audioContext = new InaudibleContext();
+            await this.audioContext.resume();
+            await this.audioContext.audioWorklet.addModule("inaudible-processor.js");
   
     
-     //   return new AudioWorkletNode(this.audioContext, "inaudible-processor");
+        return new AudioWorkletNode(this.audioContext, "inaudible-processor");
     
   }
   
