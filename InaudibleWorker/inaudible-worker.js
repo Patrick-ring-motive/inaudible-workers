@@ -40,8 +40,8 @@ window.InaudibleWorker = class InaudibleWorker {
             }
             await this.audioContext.audioWorklet.addModule("inaudible-processor.js");
   
-    
-        return new AudioWorkletNode(this.audioContext, "inaudible-processor");
+            this.node =  new AudioWorkletNode(this.audioContext, "inaudible-processor");
+        return this;
     
   }
   
