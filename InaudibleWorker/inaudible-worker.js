@@ -31,11 +31,13 @@ window.InaudibleWorker = class InaudibleWorker {
   
   
    async buildWorker(workerURL){
-
-           // await window.gestureReady();
-
+            if(!window.OfflineAudioContext){
+              await window.gestureReady();
+            }
             this.audioContext = new InaudibleContext(1,1,44100);
-            //await this.audioContext.resume();
+            if(!window.OfflineAudioContext){
+              await this.audioContext.resume();
+            }
             await this.audioContext.audioWorklet.addModule("inaudible-processor.js");
   
     
