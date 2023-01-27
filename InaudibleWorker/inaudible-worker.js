@@ -64,7 +64,7 @@ window.InaudibleWorker = class InaudibleWorker {
             console.log(e.message);
             }
           //  await this.audioContext.resume();
-            await this.audioContext.audioWorklet.addModule("inaudible-processor.js");
+         //   await this.audioContext.audioWorklet.addModule("inaudible-processor.js");
   
     
         return new AudioWorkletNode(this.audioContext, "inaudible-processor");
