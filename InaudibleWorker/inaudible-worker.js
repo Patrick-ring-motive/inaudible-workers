@@ -4,6 +4,42 @@ window.sleep = function(ms) {
     setTimeout(resolve, ms);
   });
 }
+
+window.gestureFailCount = 0;
+window.gestureAttemptCount = 0;
+if(!window.customWarn){
+window.customWarn = function (...args){
+
+  var messages = args.filter(e => typeof e == 'string');
+
+  for(m in messages){
+    if(messages[m].indexOf('gesture') != -1){
+      window.gestureFaileCount++;
+    };
+  };
+
+  return console.nativeWarn(...args);
+
+};
+
+console.nativeWarn = console.warn;
+
+console.warn = window.customWarn;
+
+}  
+  
+  
+window.gestureState = async function(){
+while(window.gestureAttemptCount<=window.gestureFailCount){
+await sleep(100);
+new InaudibleContext();
+console.log('ga',window.gestureAttemptCount);
+console.log('ga',window.gestureFailCount);
+}
+}
+
+
+
 window.InaudibleWorker = class InaudibleWorker {
  constructor(workerURL) {
 
@@ -23,11 +59,11 @@ window.InaudibleWorker = class InaudibleWorker {
             document.head.dispatchEvent(new Event('mousedown'));
              }
             try{
-            this.audioContext = new InaudibleContext();
+           // this.audioContext = new InaudibleContext();
             }catch(e){
             console.log(e.message);
             }
-            await this.audioContext.resume();
+          //  await this.audioContext.resume();
             await this.audioContext.audioWorklet.addModule("inaudible-processor.js");
   
     
