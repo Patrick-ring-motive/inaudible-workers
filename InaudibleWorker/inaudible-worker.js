@@ -7,9 +7,9 @@ window.sleep = function(ms) {
 
 window.gestureFailCount = 0;
 window.gestureAttemptCount = 0;
-if(!window.customWarn){
+if(false/*!window.customWarn*/){
 window.customWarn = function (...args){
-
+console.log(arguments[0]);
   var messages = args.filter(e => typeof e == 'string');
 
   for(m in messages){
@@ -32,7 +32,7 @@ console.warn = window.customWarn;
 window.gestureState = async function(){
   while(window.gestureAttemptCount<=window.gestureFailCount){
     await sleep(100);
-    var audioContext = new InaudibleContext();
+    var audioContext = new AudioContext();
     await audioContext.resume();
     console.log('ga',window.gestureAttemptCount);
     console.log('ga',window.gestureFailCount);
