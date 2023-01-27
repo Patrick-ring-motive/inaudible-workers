@@ -7,7 +7,7 @@ window.sleep = function(ms) {
 
 window.gestureFailCount = 0;
 window.gestureAttemptCount = 0;
-if(false/*!window.customWarn*/){
+if(!window.customWarn){
 window.customWarn = function (...args){
 console.log(arguments[0]);
   var messages = args.filter(e => typeof e == 'string');
