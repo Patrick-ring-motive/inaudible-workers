@@ -7,7 +7,7 @@ window.sleep = function(ms) {
 
   
 window.gestureReady = async function(){
-  let gestureAudioContext = new InaudibleContext(1,1,44100);
+  let gestureAudioContext = new AudioContext();
   let exponentialBackOff = 100;
   while(gestureAudioContext.state=='suspended'){
     await sleep(exponentialBackOff);
