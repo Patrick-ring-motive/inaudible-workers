@@ -34,13 +34,13 @@ window.InaudibleWorker = class InaudibleWorker {
            // if(!window.OfflineAudioContext){
               await window.gestureReady();
            // }
-            this.audioContext = new InaudibleContext(/*1,1,44100*/);
+            let audioContext = new InaudibleContext(/*1,1,44100*/);
            // if(!window.OfflineAudioContext){
-              await this.audioContext.resume();
+              await audioContext.resume();
            // }
-            await this.audioContext.audioWorklet.addModule("inaudible-processor.js");
+            await audioContext.audioWorklet.addModule("inaudible-processor.js");
   
-            return new AudioWorkletNode(this.audioContext, "inaudible-processor");
+            return new AudioWorkletNode(audioContext, "inaudible-processor");
       
     
   }
