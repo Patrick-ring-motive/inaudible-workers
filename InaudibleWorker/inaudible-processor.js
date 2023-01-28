@@ -5,7 +5,6 @@ class MyAudioProcessor extends AudioWorkletProcessor {
     console.log('processor created');
   }
   
-
   process(inputList, outputList, parameters) {
     return true;
   }
