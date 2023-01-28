@@ -34,7 +34,7 @@ window.InaudibleWorker = class InaudibleWorker {
            // if(!window.OfflineAudioContext){
               await window.gestureReady();
            // }
-            this.audioContext = new InaudibleContext(1,1,44100);
+            this.audioContext = new InaudibleContext(/*1,1,44100*/);
            // if(!window.OfflineAudioContext){
               await this.audioContext.resume();
            // }
