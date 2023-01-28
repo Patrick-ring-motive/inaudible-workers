@@ -35,6 +35,12 @@ window.InaudibleWorker = class InaudibleWorker {
 
   }
   
+  set onmessage(msg){
+  
+  this.node.port.onmessage = msg;
+  return this.node.port.onmessage;
+  
+  }
   
    async buildWorker(workerURL){
             if(!window.OfflineAudioContext){
