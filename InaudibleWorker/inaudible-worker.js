@@ -25,7 +25,7 @@ window.gestureReady = async function(){
 window.InaudibleWorker = class InaudibleWorker {
  constructor(workerURL) {
 
-  this.buildWorker(workerURL);
+  this.loaded=this.buildWorker(workerURL);
   return this;
 }
   
