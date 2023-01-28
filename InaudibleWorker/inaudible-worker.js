@@ -1,4 +1,4 @@
-window.InaudibleContext = window.OfflineAudioContext||window.AudioContext||window.webkitAudioContext||window.BaseAudioContext;
+window.InaudibleContext = window./*OfflineAudioContext*/||window.AudioContext||window.webkitAudioContext||window.BaseAudioContext;
 window.sleep = function(ms) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
@@ -31,13 +31,13 @@ window.InaudibleWorker = class InaudibleWorker {
   
   
    async buildWorker(workerURL){
-            if(!window.OfflineAudioContext){
+           // if(!window.OfflineAudioContext){
               await window.gestureReady();
-            }
+           // }
             this.audioContext = new InaudibleContext(1,1,44100);
-            if(!window.OfflineAudioContext){
+           // if(!window.OfflineAudioContext){
               await this.audioContext.resume();
-            }
+           // }
             await this.audioContext.audioWorklet.addModule("inaudible-processor.js");
   
             return new AudioWorkletNode(this.audioContext, "inaudible-processor");
