@@ -15,7 +15,7 @@
         
         let myWorker = new InaudibleWorker("inaudible-processor.js");
         await myWorker.loaded;
-        myWorker.node.port.postMessage('asdf');
+        myWorker.postMessage('asdf');
         
       }();
       
