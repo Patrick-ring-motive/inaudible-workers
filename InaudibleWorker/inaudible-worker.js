@@ -1,4 +1,4 @@
-window.InaudibleContext = window./*OfflineAudioContext*/||window.AudioContext||window.webkitAudioContext||window.BaseAudioContext;
+window.InaudibleContext = window./*Offline*/AudioContext||window.AudioContext||window.webkitAudioContext||window.BaseAudioContext;
 window.sleep = function(ms) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
