@@ -36,11 +36,11 @@ window.InaudibleWorker = class InaudibleWorker {
             }
             this.audioContext = new InaudibleContext(1,1,44100);
             if(!window.OfflineAudioContext){
-              await audioContext.resume();
+              await this.audioContext.resume();
             }
-            await audioContext.audioWorklet.addModule("inaudible-processor.js");
+            await this.audioContext.audioWorklet.addModule("inaudible-processor.js");
   
-            return new AudioWorkletNode(audioContext, "inaudible-processor");
+            return new AudioWorkletNode(this.audioContext, "inaudible-processor");
       
     
   }
