@@ -25,7 +25,7 @@ window.gestureReady = async function(){
 window.InaudibleWorker = class InaudibleWorker {
  constructor(workerURL) {
 
-  this.node = this.buildWorker(workerURL);
+  this.buildWorker(workerURL);
   return this;
 }
   
@@ -39,8 +39,8 @@ window.InaudibleWorker = class InaudibleWorker {
               await this.audioContext.resume();
             }
             await this.audioContext.audioWorklet.addModule("inaudible-processor.js");
-  
-            return new AudioWorkletNode(this.audioContext, "inaudible-processor");
+            this.node=new AudioWorkletNode(this.audioContext, "inaudible-processor");
+            return this.node;
       
     
   }
