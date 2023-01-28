@@ -4,7 +4,7 @@ class MyAudioProcessor extends AudioWorkletProcessor {
     console.log('processor created');
   }
   
-  this.port.onmessage=function(){console.log('port message received');};
+  //this.port.onmessage=function(){console.log('port message received');};
 
   process(inputList, outputList, parameters) {
     return true;
