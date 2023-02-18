@@ -3,8 +3,8 @@ const second = document.querySelector('#number2');
 
 const result = document.querySelector('.result');
 
-if (window.WindowWorker) {
-  const myWorker = new WindowWorker("worker.js");
+if (window.InaudibleWorker) {
+  const myWorker = new InaudibleWorker("worker.js");
 
   first.onchange = function() {
     myWorker.postMessage([first.value, second.value]);
@@ -21,5 +21,5 @@ if (window.WindowWorker) {
     console.log('Message received from worker');
   }
 } else {
-  console.log('Your browser doesn\'t support window workers.');
+  console.log('Your browser doesn\'t support Inaudible workers.');
 }
