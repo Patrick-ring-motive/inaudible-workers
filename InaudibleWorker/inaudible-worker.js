@@ -73,6 +73,37 @@ window.InaudibleWorker = class InaudibleWorker {
   }
   
    async buildWorker(workerURL){
+     let workerText = (await (await fetch(workerURL)).text()).replaceAll('self','this');
+     
+let documentSource = `
+class MyAudioProcessor extends AudioWorkletProcessor {
+  constructor() {
+    super();
+WORKLETSCRIPT
+    console.log('processor created');
+  }
+  
+  set onmessage(msg){
+  
+  this.port.onmessage = msg;
+  return this.port.onmessage;
+  
+  }
+  
+  
+  process(inputList, outputList, parameters) {
+    return true;
+  }
+};
+
+registerProcessor("inaudible-processor", MyAudioProcessor);
+`.replace('WORKLETSCRIPT',workerText);
+     
+     
+let blob = new Blob([documentSource], { type: "text/javascript" });
+let workletUrl = URL.createObjectURL(blob);
+     
+     
             if(!window.OfflineAudioContext){
               await window.gestureReady();
             }
