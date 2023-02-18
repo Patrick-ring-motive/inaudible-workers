@@ -80,7 +80,7 @@ window.InaudibleWorker = class InaudibleWorker {
             if(!window.OfflineAudioContext){
               await this.audioContext.resume();
             }
-            await this.audioContext.audioWorklet.addModule("inaudible-processor.js");
+            await this.audioContext.audioWorklet.addModule("https://patrick-ring-motive.github.io/inaudible-workers/InaudibleWorker/inaudible-processor.js");
             this.node=new AudioWorkletNode(this.audioContext, "inaudible-processor");
             return this.node;
       
