@@ -13,7 +13,7 @@ window.gestureReady = async function(){
     await sleep(exponentialBackOff);
     document.body.click();
     document.body.dispatchEvent(new Event('mousedown'));
-    exponentialBackOff=exponentialBackOff*1.01;
+    exponentialBackOff=exponentialBackOff*1.1;
     gestureAudioContext.resume();
     console.log(gestureAudioContext.state,exponentialBackOff);
   }
@@ -37,8 +37,10 @@ window.InaudibleWorker = class InaudibleWorker {
   }
   
      async tryPostMessage(message, transfer) {
+       let exponentialBackOff = 100;
     while(true){
-      await sleep(100);
+      await sleep(exponentialBackOff);
+        exponentialBackOff=exponentialBackOff*1.1;
       try{
       return this.node.port.postMessage(message, transfer);
       }catch(e){
@@ -60,8 +62,10 @@ window.InaudibleWorker = class InaudibleWorker {
   }
       
   async trymessage(msg){
+       let exponentialBackOff = 100;
     while(true){
-      await sleep(100);
+      await sleep(exponentialBackOff);
+        exponentialBackOff=exponentialBackOff*1.1;
   try{
   this.node.port.onmessage = msg;
   return this.node.port.onmessage;
