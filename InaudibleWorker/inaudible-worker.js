@@ -24,7 +24,6 @@ window.gestureReady = async function(){
 
 window.InaudibleWorker = class InaudibleWorker {
  constructor(workerURL) {
-  this.node='';
   this.loaded=this.buildWorker(workerURL);
   return this;
 }
@@ -36,10 +35,24 @@ window.InaudibleWorker = class InaudibleWorker {
   }
   
   set onmessage(msg){
-  
+  try{
   this.node.port.onmessage = msg;
   return this.node.port.onmessage;
-  
+  }catch(e){
+  trynessage(msg);
+  }
+  }
+  async trynessage(msg){
+    while(true){
+      await sleep(100);
+  try{
+  this.node.port.onmessage = msg;
+  return this.node.port.onmessage;
+  }catch(e){
+  continue;
+  }
+  break;
+    }
   }
   
    async buildWorker(workerURL){
