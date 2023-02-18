@@ -29,8 +29,24 @@ window.InaudibleWorker = class InaudibleWorker {
 }
   
     postMessage(message, transfer) {
-
+  try{
     return this.node.port.postMessage(message, transfer);
+    }catch(e){
+    this.tryPostMessage(message, transfer);
+    }
+  }
+  
+     async tryPostMessage(message, transfer) {
+    while(true){
+      await sleep(100);
+      try{
+      return this.node.port.postMessage(message, transfer);
+      }catch(e){
+      continue;
+      }
+      break;
+    }
+  
 
   }
   
@@ -42,6 +58,7 @@ window.InaudibleWorker = class InaudibleWorker {
   this.trymessage(msg);
   }
   }
+      
   async trymessage(msg){
     while(true){
       await sleep(100);
