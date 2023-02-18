@@ -39,10 +39,10 @@ window.InaudibleWorker = class InaudibleWorker {
   this.node.port.onmessage = msg;
   return this.node.port.onmessage;
   }catch(e){
-  trynessage(msg);
+  this.trymessage(msg);
   }
   }
-  async trynessage(msg){
+  async trymessage(msg){
     while(true){
       await sleep(100);
   try{
