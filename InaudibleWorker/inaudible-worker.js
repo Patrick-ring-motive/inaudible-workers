@@ -83,6 +83,8 @@ let documentSource = `
 class MyAudioProcessor extends AudioWorkletProcessor {
   constructor() {
     super();
+    console.log(this);
+    console.log(self);
 WORKLETSCRIPT
     console.log('processor created');
   }
