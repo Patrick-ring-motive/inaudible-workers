@@ -95,7 +95,11 @@ WORKLETSCRIPT
   return this.port.onmessage;
   
   }
+  postMessage(message,transfer){
   
+  return this.port.postMessage(message,transfer);
+  
+  }
   
   process(inputList, outputList, parameters) {
     return true;
