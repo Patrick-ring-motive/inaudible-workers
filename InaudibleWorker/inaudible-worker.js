@@ -77,14 +77,14 @@ window.InaudibleWorker = class InaudibleWorker {
   }
   
    async buildWorker(workerURL){
-     let workerText = (await (await fetch(workerURL)).text()).replaceAll('self','this');
+     let workerText = (await (await fetch(workerURL)).text());
      
 let documentSource = `
 class MyAudioProcessor extends AudioWorkletProcessor {
   constructor() {
     super();
-    console.log(this);
-    console.log(self);
+this.self=this;
+globalThis.self=this;
 WORKLETSCRIPT
     console.log('processor created');
   }
