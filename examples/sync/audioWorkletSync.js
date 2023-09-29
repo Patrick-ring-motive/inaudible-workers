@@ -108,12 +108,12 @@ void async function WorkletBuilder(){
 
   let source = myWorker.audioContext.createBufferSource();
 
-  const buffer = new ArrayBuffer(128);
-
+  let data = new ArrayBuffer(128);
+decodeAudioData(data,(buffer)=>{
       source.buffer = buffer;
       source.connect(myWorker.audioContext.destination);
       source.start();
-  
+  });
 }?.();
 
 
