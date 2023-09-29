@@ -1,4 +1,4 @@
-void function WorkletBuilder(){
+void async function WorkletBuilder(){
   if(!globalThis.window){return;}
   console.log('WorkletBuilder');
   
@@ -102,6 +102,7 @@ void function WorkletBuilder(){
   }
 
   const myWorker = new InaudibleWorker(document.currentScript.src);
+  await myworker.loaded;
 }?.();
 
 
