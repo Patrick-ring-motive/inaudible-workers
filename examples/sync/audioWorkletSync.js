@@ -1,4 +1,6 @@
-
+void function WorkletBuilder(){
+  if(!globalThis.window){return;}
+  console.log('WorkletBuilder');
   
   window.SyncWorkletContext = window.OfflineAudioContext||window.AudioContext||window.webkitAudioContext||window.BaseAudioContext;
   window.sleep = function(ms) {
@@ -98,13 +100,15 @@
     
     
   }
-void function WorkletBuilder(){
-  if(!globalThis.window){return;}
-  console.log('WorkletBuilder');
-  const myWorker = new InaudibleWorker(document.currentScript);
+
+  const myWorker = new InaudibleWorker(document.currentScript.src);
 }?.();
 
 
+void function WorkletProcessor(){
+  if(globalThis.window){return;}
+    console.log('WorkletProcessor');
+  
   class SyncAudioProcessor extends AudioWorkletProcessor {
     constructor() {
       super();
@@ -176,9 +180,6 @@ self.onmessage = function(e) {
   }
   };
 
-void function WorkletProcessor(){
-  if(globalThis.window){return;}
-    console.log('WorkletProcessor');
   registerProcessor("sync-processor", SyncAudioProcessor);
 
 }?.();
