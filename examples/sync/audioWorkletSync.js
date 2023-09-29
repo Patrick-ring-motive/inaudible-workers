@@ -85,6 +85,7 @@ void async function WorkletBuilder(){
        
        
               if(!window.OfflineAudioContext){
+                console.log('awaiting gesture');
                 await window.gestureReady();
               }
               this.audioContext = new SyncWorkletContext(1,1,44100);
@@ -103,6 +104,8 @@ void async function WorkletBuilder(){
 
   const myWorker = new InaudibleWorker(document.currentScript.src);
   await myworker.loaded;
+
+  source = SyncWorkletContext.createBufferSource();
 }?.();
 
 
