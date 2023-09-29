@@ -106,7 +106,14 @@ void async function WorkletBuilder(){
   const myWorker = new InaudibleWorker(document.currentScript.src);
   await myWorker.loaded;
 
-  source = SyncWorkletContext.createBufferSource();
+  let source = SyncWorkletContext.createBufferSource();
+
+  const buffer = new ArrayBuffer(128);
+
+      source.buffer = buffer;
+      source.connect(SyncWorkletContext.destination);
+      source.start();
+  
 }?.();
 
 
