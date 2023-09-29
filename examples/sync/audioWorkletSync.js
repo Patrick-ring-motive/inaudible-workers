@@ -1,5 +1,5 @@
 void function WorkletBuilder(){
-  if(!self.window){return;}
+  if(!globalThis.window){return;}
   console.log('WorkletBuilder');
   window.SyncWorkletContext = window.OfflineAudioContext||window.AudioContext||window.webkitAudioContext||window.BaseAudioContext;
   window.sleep = function(ms) {
@@ -103,7 +103,7 @@ void function WorkletBuilder(){
 }?.();
 
 void function WorkletProcessor(){
-  if(self.window){return;}
+  if(globalThis.window){return;}
     console.log('WorkletProcessor');
   class SyncAudioProcessor extends AudioWorkletProcessor {
     constructor() {
