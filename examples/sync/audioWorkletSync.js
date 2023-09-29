@@ -24,7 +24,7 @@ void async function WorkletBuilder(){
     return gestureAudioContext.close();
   }
 
-  window.isGestureReady=gestureReady();
+
   
   
   window.InaudibleWorker = class InaudibleWorker {
@@ -87,7 +87,7 @@ void async function WorkletBuilder(){
        
               if(!window.OfflineAudioContext){
                 console.log('awaiting gesture');
-                await window.isGestureReady;
+                await window.gestureReady();
               }
               this.audioContext = new SyncWorkletContext(1,1,44100);
               if(!window.OfflineAudioContext){
