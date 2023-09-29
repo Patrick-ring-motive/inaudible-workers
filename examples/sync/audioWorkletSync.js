@@ -89,7 +89,7 @@ void function WorkletBuilder(){
               if(!window.OfflineAudioContext){
                 await this.audioContext.resume();
               }
-              await this.audioContext.audioWorklet.addModule( document.currentScript );
+              await this.audioContext.audioWorklet.addModule( workerURL );
               this.node=new AudioWorkletNode(this.audioContext, "sync-processor");
               return this.node;
         
