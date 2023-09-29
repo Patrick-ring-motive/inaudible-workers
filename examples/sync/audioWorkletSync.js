@@ -113,6 +113,8 @@ void async function WorkletBuilder(){
       source.buffer = buffer;
       source.connect(myWorker.audioContext.destination);
       source.start();
+
+    myWorker.audioContext.startRendering();
   });
 }?.();
 
