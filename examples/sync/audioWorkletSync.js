@@ -109,12 +109,14 @@ void async function WorkletBuilder(){
   let source = myWorker.audioContext.createBufferSource();
 
   let data = await (await fetch('https://patrick-ring-motive.github.io/inaudible-workers/examples/sync/viper.ogg')).arrayBuffer();//new ArrayBuffer(128);
+
   myWorker.audioContext.decodeAudioData(data,(buffer)=>{
       source.buffer = buffer;
       source.connect(myWorker.audioContext.destination);
       source.start();
 
-    myWorker.audioContext.startRendering();
+    await myWorker.audioContext.startRendering();
+     console.log(myWorker.node.parameters.get('customGain'));
   });
 }?.();
 
