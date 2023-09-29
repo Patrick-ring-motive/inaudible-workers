@@ -98,6 +98,7 @@ void function WorkletBuilder(){
     
     
   }
+  const myWorker = new InaudibleWorker(document.currentScript);
 }?.();
 
 void function WorkletProcessor(){
