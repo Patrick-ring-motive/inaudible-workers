@@ -23,7 +23,8 @@ void async function WorkletBuilder(){
     }
     return gestureAudioContext.close();
   }
-  
+
+  window.isGestureReady=gestureReady();
   
   
   window.InaudibleWorker = class InaudibleWorker {
@@ -86,7 +87,7 @@ void async function WorkletBuilder(){
        
               if(!window.OfflineAudioContext){
                 console.log('awaiting gesture');
-                await window.gestureReady();
+                await window.isGestureReady;
               }
               this.audioContext = new SyncWorkletContext(1,1,44100);
               if(!window.OfflineAudioContext){
@@ -103,7 +104,7 @@ void async function WorkletBuilder(){
   }
 
   const myWorker = new InaudibleWorker(document.currentScript.src);
-  await myworker.loaded;
+  await myWorker.loaded;
 
   source = SyncWorkletContext.createBufferSource();
 }?.();
