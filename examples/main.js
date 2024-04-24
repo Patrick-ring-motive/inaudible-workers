@@ -5,7 +5,10 @@ const result = document.querySelector('.result');
 
 if (window.InaudibleWorker) {
   const myWorker = new InaudibleWorker("worker.js");
-  console.log(myWorker.paramters.get('customGain'));
+  void async function(){
+    await myWorker.loaded;  
+    console.log(myWorker.node.paramters.get('customGain'));
+  }();
   first.onchange = function() {
     myWorker.postMessage([first.value, second.value]);
     console.log('Message posted to worker');
