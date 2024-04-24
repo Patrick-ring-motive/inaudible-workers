@@ -7,7 +7,16 @@ if (window.InaudibleWorker) {
   const myWorker = new InaudibleWorker("worker.js");
   void async function(){
     await myWorker.loaded;  
-    console.log(myWorker.node.paramters.get('customGain'));
+    while(true){
+    try{
+      console.log(myWorker.node.paramters.get('customGain'));
+    }catch(e){
+      console.log(e);
+      await sleep(100);
+      continue;
+    }
+    break;
+    }
   }();
   first.onchange = function() {
     myWorker.postMessage([first.value, second.value]);
