@@ -81,6 +81,8 @@ let documentSource = `
 class MyAudioProcessor extends AudioWorkletProcessor {
   constructor() {
     super();
+
+    globalThis.cg = 7
 this.self=this;
 globalThis.self=this;
 WORKLETSCRIPT
@@ -88,7 +90,7 @@ WORKLETSCRIPT
   }
   
   set onmessage(msg){
-  
+  globalThis.cg=80;
   this.port.onmessage = msg;
   return this.port.onmessage;
   
@@ -107,9 +109,9 @@ WORKLETSCRIPT
     return [
       {
         name: "customGain",
-        defaultValue: 1,
+        defaultValue: cg,
         minValue: 0,
-        maxValue: 1,
+        maxValue: 100,
         automationRate: "a-rate",
       },
     ];
