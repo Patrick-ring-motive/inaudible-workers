@@ -102,6 +102,19 @@ WORKLETSCRIPT
   process(inputList, outputList, parameters) {
     return true;
   }
+
+    static get parameterDescriptors() {
+    return [
+      {
+        name: "customGain",
+        defaultValue: 1,
+        minValue: 0,
+        maxValue: 1,
+        automationRate: "a-rate",
+      },
+    ];
+  }
+  
 };
 
 registerProcessor("inaudible-processor", MyAudioProcessor);
