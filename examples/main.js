@@ -1,4 +1,4 @@
-(()=>{
+//(()=>{
 const first = document.querySelector('#number1');
 const second = document.querySelector('#number2');
 
@@ -41,4 +41,4 @@ if (window.InaudibleWorker) {
 } else {
   console.log('Your browser doesn\'t support Inaudible workers.');
 }
-})();
+//})();
