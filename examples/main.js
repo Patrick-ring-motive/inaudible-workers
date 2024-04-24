@@ -1,8 +1,14 @@
+(()=>{
 const first = document.querySelector('#number1');
 const second = document.querySelector('#number2');
 
 const result = document.querySelector('.result');
-
+if (!globalThis.requestIdleCallback) {
+   globalThis.requestIdleCallback = globalThis.requestAnimationFrame;
+}
+globalThis.nextIdle=function(){
+  return new Promise((resolve) => {requestIdleCallback(resolve);});  
+}
 if (window.InaudibleWorker) {
   const myWorker = new InaudibleWorker("worker.js");
   void async function(){
@@ -12,7 +18,7 @@ if (window.InaudibleWorker) {
       console.log(myWorker.node.paramters.get('customGain'));
     }catch(e){
       console.log(e);
-      await sleep(100);
+      await nextIdle();
       continue;
     }
     break;
@@ -35,3 +41,4 @@ if (window.InaudibleWorker) {
 } else {
   console.log('Your browser doesn\'t support Inaudible workers.');
 }
+})();
