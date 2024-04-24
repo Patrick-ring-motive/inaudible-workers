@@ -104,7 +104,7 @@ WORKLETSCRIPT
   process(inputList, outputList, parameters) {
     if(self.process){
       self.process=false;
-      comsole.log(inputList;
+      comsole.log(inputList);
     }
     return true;
   }
