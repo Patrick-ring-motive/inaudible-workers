@@ -137,6 +137,7 @@ let workletUrl = URL.createObjectURL(blob);
             }
             await this.audioContext.audioWorklet.addModule( workletUrl );
             this.node=new AudioWorkletNode(this.audioContext, "inaudible-processor");
+            this.node.connect(this.audioContext.destination);
             return this.node;
       
     
