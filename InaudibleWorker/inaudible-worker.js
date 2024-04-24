@@ -85,6 +85,7 @@ class MyAudioProcessor extends AudioWorkletProcessor {
     globalThis.cg = 7
 this.self=this;
 globalThis.self=this;
+  self.processlog=true;
 WORKLETSCRIPT
     console.log('processor created');
   }
@@ -100,9 +101,9 @@ WORKLETSCRIPT
   return this.port.postMessage(message,transfer);
   
   }
-  self.processlog=true;
+
   process(inputList, outputList, parameters) {
-    if(self.processlog){
+    if(self&&self.processlog){
       self.processlog=false;
       console.log(inputList);
     }
