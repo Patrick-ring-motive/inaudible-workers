@@ -106,10 +106,11 @@ WORKLETSCRIPT
   }
 
     static get parameterDescriptors() {
+    console.log('asdf');
     return [
       {
         name: "customGain",
-        defaultValue: cg,
+        defaultValue: 7,
         minValue: 0,
         maxValue: 100,
         automationRate: "a-rate",
