@@ -15,7 +15,7 @@ if (window.InaudibleWorker) {
     await myWorker.loaded;  
     while(true){
     try{
-      console.log(myWorker.node.paramters.get('customGain'));
+      console.log(myWorker.node.parameters.get('customGain'));
     }catch(e){
       console.log(e);
       await nextIdle();
