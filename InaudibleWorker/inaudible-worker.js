@@ -30,9 +30,9 @@ window.InaudibleWorker = class InaudibleWorker {
   
     postMessage(message, transfer) {
   try{
-    return this.node.port.postMessage(message, transfer);
+      return this.node.port.postMessage(message, transfer);
     }catch(e){
-    this.tryPostMessage(message, transfer);
+      this.tryPostMessage(message, transfer);
     }
   }
   
@@ -48,31 +48,29 @@ window.InaudibleWorker = class InaudibleWorker {
       }
       break;
     }
-  
-
   }
   
   set onmessage(msg){
-  try{
-  this.node.port.onmessage = msg;
-  return this.node.port.onmessage;
-  }catch(e){
-  this.trymessage(msg);
-  }
+    try{
+      this.node.port.onmessage = msg;
+      return this.node.port.onmessage;
+    }catch(e){
+      this.trymessage(msg);
+    }
   }
       
   async trymessage(msg){
-       let exponentialBackOff = 100;
+    let exponentialBackOff = 100;
     while(true){
       await sleep(exponentialBackOff);
-        exponentialBackOff=exponentialBackOff*1.1;
-  try{
-  this.node.port.onmessage = msg;
-  return this.node.port.onmessage;
-  }catch(e){
-  continue;
-  }
-  break;
+        exponentialBackOff = exponentialBackOff*1.1;
+        try{
+          this.node.port.onmessage = msg;
+          return this.node.port.onmessage;
+        }catch(e){
+          continue;
+        }
+        break;
     }
   }
   
