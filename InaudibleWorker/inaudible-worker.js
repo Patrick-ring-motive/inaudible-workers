@@ -100,8 +100,12 @@ WORKLETSCRIPT
   return this.port.postMessage(message,transfer);
   
   }
-  
+  self.processl0g=true;
   process(inputList, outputList, parameters) {
+    if(self.process){
+      self.process=false;
+      comsole.log(inputList;
+    }
     return true;
   }
 
