@@ -1,12 +1,12 @@
 window.InaudibleContext = window.OfflineAudioContext||window.AudioContext||window.webkitAudioContext||window.BaseAudioContext;
-window.sleep = function(ms) {
+window.sleep = function sleep(ms) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
 }
 
   
-window.gestureReady = async function(){
+window.gestureReady = async function gestureReady(){
   let gestureAudioContext = new AudioContext();
   let exponentialBackOff = 100;
   while(gestureAudioContext.state=='suspended'){
@@ -32,7 +32,8 @@ window.InaudibleWorker = class InaudibleWorker {
   try{
       return this.node.port.postMessage(message, transfer);
     }catch(e){
-      this.tryPostMessage(message, transfer);
+      console.warn(e,...arguments);
+      return this.tryPostMessage(message, transfer);
     }
   }
   
@@ -40,11 +41,11 @@ window.InaudibleWorker = class InaudibleWorker {
        let exponentialBackOff = 100;
     while(true){
       await sleep(exponentialBackOff);
-        exponentialBackOff=exponentialBackOff*1.1;
+      exponentialBackOff *= 1.1;
       try{
-      return this.node.port.postMessage(message, transfer);
-      }catch(e){
-      continue;
+         return this.node.port.postMessage(message, transfer);
+      }catch{
+         continue;
       }
       break;
     }
@@ -55,7 +56,8 @@ window.InaudibleWorker = class InaudibleWorker {
       this.node.port.onmessage = msg;
       return this.node.port.onmessage;
     }catch(e){
-      this.trymessage(msg);
+      console.warn(e,...arguments);
+      return this.trymessage(msg);
     }
   }
       
@@ -63,11 +65,11 @@ window.InaudibleWorker = class InaudibleWorker {
     let exponentialBackOff = 100;
     while(true){
       await sleep(exponentialBackOff);
-        exponentialBackOff = exponentialBackOff*1.1;
+        exponentialBackOff *= 1.1;
         try{
           this.node.port.onmessage = msg;
           return this.node.port.onmessage;
-        }catch(e){
+        }catch{
           continue;
         }
         break;
@@ -141,7 +143,7 @@ let workletUrl = URL.createObjectURL(blob);
               await this.audioContext.resume();
             }
             await this.audioContext.audioWorklet.addModule( workletUrl );
-            this.node=new AudioWorkletNode(this.audioContext, "inaudible-processor");
+            this.node = new AudioWorkletNode(this.audioContext, "inaudible-processor");
             this.node.connect(this.audioContext.destination);
             return this.node;
       
