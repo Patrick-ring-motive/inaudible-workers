@@ -1,85 +1,82 @@
-window.InaudibleContext = window.OfflineAudioContext||window.AudioContext||window.webkitAudioContext||window.BaseAudioContext;
+window.InaudibleContext = window.OfflineAudioContext || window.AudioContext || window.webkitAudioContext || window.BaseAudioContext;
 window.sleep = function sleep(ms) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
 }
 
-  
-window.gestureReady = async function gestureReady(){
+window.gestureReady = async function gestureReady() {
   let gestureAudioContext = new AudioContext();
   let exponentialBackOff = 100;
-  while(gestureAudioContext.state=='suspended'){
+  while (gestureAudioContext.state == 'suspended') {
     await sleep(exponentialBackOff);
     document.body.click();
     document.body.dispatchEvent(new Event('mousedown'));
-    exponentialBackOff=exponentialBackOff*1.1;
+    exponentialBackOff = exponentialBackOff * 1.1;
     gestureAudioContext.resume();
-    console.log(gestureAudioContext.state,exponentialBackOff);
+    console.log(gestureAudioContext.state, exponentialBackOff);
   }
   return gestureAudioContext.close();
 }
 
-
-
 window.InaudibleWorker = class InaudibleWorker {
- constructor(workerURL) {
-  this.loaded=this.buildWorker(workerURL);
-  return this;
-}
-  
-    postMessage(message, transfer) {
-  try{
+  constructor(workerURL) {
+    this.loaded = this.buildWorker(workerURL);
+    return this;
+  }
+
+  postMessage(message, transfer) {
+    try {
       return this.node.port.postMessage(message, transfer);
-    }catch(e){
-      console.warn(e,...arguments);
+    } catch (e) {
+      console.warn(e, ...arguments);
       return this.tryPostMessage(message, transfer);
     }
   }
-  
-     async tryPostMessage(message, transfer) {
-       let exponentialBackOff = 100;
-    while(true){
+
+  async tryPostMessage(message, transfer) {
+    let exponentialBackOff = 100;
+    while (true) {
       await sleep(exponentialBackOff);
       exponentialBackOff *= 1.1;
-      try{
-         return this.node.port.postMessage(message, transfer);
-      }catch{
-         continue;
+      try {
+        return this.node.port.postMessage(message, transfer);
+      } catch {
+        continue;
       }
       break;
     }
   }
-  
-  set onmessage(msg){
-    try{
+
+  set onmessage(msg) {
+    try {
       this.node.port.onmessage = msg;
       return this.node.port.onmessage;
-    }catch(e){
-      console.warn(e,...arguments);
+    } catch (e) {
+      console.warn(e, ...arguments);
       return this.trymessage(msg);
     }
   }
-      
-  async trymessage(msg){
+
+  async trymessage(msg) {
     let exponentialBackOff = 100;
-    while(true){
+    while (true) {
       await sleep(exponentialBackOff);
-        exponentialBackOff *= 1.1;
-        try{
-          this.node.port.onmessage = msg;
-          return this.node.port.onmessage;
-        }catch{
-          continue;
-        }
-        break;
+      exponentialBackOff *= 1.1;
+      try {
+        this.node.port.onmessage = msg;
+        return this.node.port.onmessage;
+      } catch {
+        continue;
+      }
+      break;
     }
   }
-  
-   async buildWorker(workerURL){
-     let workerText = (await (await fetch(workerURL)).text());
-     
-let documentSource = `
+
+  async buildWorker(workerURL) {
+    let workerText = (await (await fetch(workerURL)).text());
+
+    let documentSource = `
 class MyAudioProcessor extends AudioWorkletProcessor {
   constructor() {
     super();
@@ -128,27 +125,25 @@ WORKLETSCRIPT
 };
 
 registerProcessor("inaudible-processor", MyAudioProcessor);
-`.replace('WORKLETSCRIPT',workerText);
-     
-     
-let blob = new Blob([documentSource], { type: "text/javascript" });
-let workletUrl = URL.createObjectURL(blob);
-     
-     
-            if(!window.OfflineAudioContext){
-              await window.gestureReady();
-            }
-            this.audioContext = new InaudibleContext(1,1,44100);
-            if(!window.OfflineAudioContext){
-              await this.audioContext.resume();
-            }
-            await this.audioContext.audioWorklet.addModule( workletUrl );
-            this.node = new AudioWorkletNode(this.audioContext, "inaudible-processor");
-            this.node.connect(this.audioContext.destination);
-            return this.node;
-      
-    
+`.replace('WORKLETSCRIPT', workerText);
+
+    let blob = new Blob([documentSource], {
+      type: "text/javascript"
+    });
+    let workletUrl = URL.createObjectURL(blob);
+
+    if (!window.OfflineAudioContext) {
+      await window.gestureReady();
+    }
+    this.audioContext = new InaudibleContext(1, 1, 44100);
+    if (!window.OfflineAudioContext) {
+      await this.audioContext.resume();
+    }
+    await this.audioContext.audioWorklet.addModule(workletUrl);
+    this.node = new AudioWorkletNode(this.audioContext, "inaudible-processor");
+    this.node.connect(this.audioContext.destination);
+    return this.node;
+
   }
-  
-  
+
 }

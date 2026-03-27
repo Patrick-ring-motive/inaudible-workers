@@ -4,24 +4,26 @@ const second = document.querySelector('#number2');
 
 const result = document.querySelector('.result');
 if (!globalThis.requestIdleCallback) {
-   globalThis.requestIdleCallback = globalThis.requestAnimationFrame;
+  globalThis.requestIdleCallback = globalThis.requestAnimationFrame;
 }
-globalThis.nextIdle=function(){
-  return new Promise((resolve) => {requestIdleCallback(resolve);});  
+globalThis.nextIdle = function() {
+  return new Promise((resolve) => {
+    requestIdleCallback(resolve);
+  });
 }
 if (window.InaudibleWorker) {
   const myWorker = new InaudibleWorker("worker.js");
-  void async function(){
-    await myWorker.loaded;  
-    while(true){
-    try{
-      console.log(myWorker.node.parameters.get('customGain'));
-    }catch(e){
-      console.log(e);
-      await nextIdle();
-      continue;
-    }
-    break;
+  void async function() {
+    await myWorker.loaded;
+    while (true) {
+      try {
+        console.log(myWorker.node.parameters.get('customGain'));
+      } catch (e) {
+        console.log(e);
+        await nextIdle();
+        continue;
+      }
+      break;
     }
   }();
   first.onchange = function() {
