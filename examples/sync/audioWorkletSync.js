@@ -114,6 +114,7 @@ void async function WorkletBuilder() {
 }?.();
 
 void
+
 function WorkletProcessor() {
   if (globalThis.window) {
     return;
