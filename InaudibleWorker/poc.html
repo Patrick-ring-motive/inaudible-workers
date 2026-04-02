@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>single thread test</title>
-  </head>
-  <body>
 
-    <script src="inaudible-worker.js" ></script>
-    <script>
-      
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>single thread test</title>
+</head>
 
-      void async function main(){
-        
-        let myWorker = new InaudibleWorker("inaudible-processor.js");
-        await myWorker.loaded;
-        myWorker.postMessage('asdf');
-        
-      }();
-      
-      
-      
-    </script>
-    
+<body>
 
-  </body>
+  <script src="inaudible-worker.js"></script>
+  <script>
+    void async function main() {
+
+      let myWorker = new InaudibleWorker("inaudible-processor.js");
+      await myWorker.loaded;
+      myWorker.postMessage('asdf');
+
+    }();
+
+  </script>
+
+
+</body>
+
 </html>
